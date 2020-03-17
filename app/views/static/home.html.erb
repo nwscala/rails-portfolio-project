@@ -1,17 +1,12 @@
 <h1>Welcome to Follow the Birdie!</h1>
 <% if !logged_in?%>
-    <p><%= link_to "Sign Up", new_birdwatcher_path %></p>
-    <p><%= link_to "Login", login_path %></p>
-    <p><%= link_to "Login with GitHub", '/auth/github' %></p>
+  <% if flash[:notice] %>
+    <div class="notice"><%= flash[:notice] %></div>
+  <% end %>
+  <p><%= link_to "Sign Up", new_birdwatcher_path %></p>
+  <p><%= link_to "Login", login_path %></p>
+  <p><%= link_to "Login with GitHub", '/auth/github' %></p>
 <% else %>
 
 <% end %>
-<% if name = session[:name] %>
-  <p>Welcome <%= name -%>! We know who you are thanks to Omniauth!</p>
-  <p>You were authenticated by  <%= session[:omniauth_data]['provider'] %></p>
 
-  The raw data returned from Omniauth were:
-  <pre>
-    <%= session[:omniauth_data] %>
-  </pre>
-<% end %>

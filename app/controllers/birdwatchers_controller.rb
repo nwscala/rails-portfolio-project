@@ -1,4 +1,5 @@
 class BirdwatchersController < ApplicationController
+    
     def new
         @birdwatcher = Birdwatcher.new
     end
@@ -10,8 +11,25 @@ class BirdwatchersController < ApplicationController
             session[:birdwatcher_id] = @birdwatcher.id
             redirect_to birdwatcher_path(@birdwatcher)
         else
-            redirect_to new_birdwatcher_path
+            render :new
         end
+    end
+
+    def edit
+        @birdwatcher = Birdwatcher.find(params[:id])
+    end
+
+    def update
+        @birdwatcher = Birdwatcher.find(params[:id])
+        if @birdwatcher.update(birdwatcher_params)
+            redirect_to birdwatcher_path(@birdwatcher)
+        else
+            render :edit
+        end
+    end
+
+    def show
+        @birdwatcher = Birdwatcher.find(params[:id])
     end
 
     private

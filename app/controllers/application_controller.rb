@@ -6,7 +6,13 @@ class ApplicationController < ActionController::Base
     end
 
     def current_user
-        Birdwatcher.find_by_id(params[:birdwatcher_id])
+        Birdwatcher.find_by_id(session[:birdwatcher_id])
     end
     
+    def require_login
+        unless logged_in?
+            flash[:notice] = "You must sign up or login to access that page."
+            redirect_to root_path
+        end
+    end
 end
