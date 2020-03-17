@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_16_194737) do
+ActiveRecord::Schema.define(version: 2020_03_17_213235) do
 
   create_table "birds", force: :cascade do |t|
     t.string "common_name"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 2020_03_16_194737) do
     t.boolean "ornithologist", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "uid"
   end
 
   create_table "sightings", force: :cascade do |t|
