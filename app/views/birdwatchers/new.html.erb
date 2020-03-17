@@ -1,0 +1,17 @@
+<h1>New Birdwatcher Form</h1>
+
+<%= form_for @birdwatcher do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    <br>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+    <br>
+    <%= f.label :age %>
+    <%= f.number_field :age %>
+    <br>
+    <%= f.label :ornithologist, "Are you an ornithologist?" %>
+    <%= f.check_box :ornithologist %>
+    <br>
+    <%= f.submit "Create New Birdwatcher"%>
+<% end %>
