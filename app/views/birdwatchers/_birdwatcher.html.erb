@@ -1,0 +1,28 @@
+<% if birdwatcher.errors.any? %>
+  <div id="error_explanation">
+    <h2>There were some errors:</h2>
+    <ul>
+      <% birdwatcher.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_for birdwatcher do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    <br>
+    <% unless birdwatcher.uid %>
+        <%= f.label :password %>
+        <%= f.password_field :password %>
+    <% end %>
+    <br>
+    <%= f.label :age %>
+    <%= f.number_field :age %>
+    <br>
+    <%= f.label :ornithologist, "Are you an ornithologist?" %>
+    <%= f.check_box :ornithologist %>
+    <br>
+    <%= f.submit %>
+<% end %>
