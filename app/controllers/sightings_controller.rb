@@ -24,4 +24,8 @@ class SightingsController < ApplicationController
     def delete
 
     end
+
+    private
+
+    
 end

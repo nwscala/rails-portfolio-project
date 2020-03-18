@@ -1,0 +1,5 @@
+<ul>
+    <% @birds.each do |bird| %>
+        <li><%= link_to bird.name, bird_path(bird) %></li>
+    <% end %>
+</ul>

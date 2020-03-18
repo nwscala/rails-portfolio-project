@@ -1,0 +1,18 @@
+<h1>Info About <%= @bird.common_name.pluralize %></h1>
+<p>Common Name: <%= @bird.common_name %></p>
+<p>Scientific Name: <%= @bird.scientific_name %></p>
+<p>Conservation Status: <%= @bird.conservation_status %></p>
+
+<h3><%= @bird.common_name %> Sightings</h3>
+<ul>
+    <% @bird.sightings.each do |sighting| %>
+        <li>
+            <div>
+                <p>Name of Spotter: <%= link_to sighting.birdwatcher.name, birdwatcher_sighting_path(sighting.birdwatcher, sighting) %></p>
+                <p>Location of Sighting: <%= sighting.location %></p>
+                <p>Time of Day of Sighting: <%= sighting.time_of_day %></p>
+                <p>Time of Year of Sighting: <%= sighting.time_of_year %></p>
+            </div>
+        </li>
+    <% end %>
+</ul>
