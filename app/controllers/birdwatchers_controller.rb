@@ -1,5 +1,6 @@
 class BirdwatchersController < ApplicationController
     skip_before_action :require_login, only: [:new, :create]
+    before_action :set_birdwatcher, except: [:index, :new, :create]
     
     def index
         @birdwatchers = Birdwatcher.all
@@ -21,11 +22,10 @@ class BirdwatchersController < ApplicationController
     end
 
     def edit
-        @birdwatcher = Birdwatcher.find(params[:id])
+        
     end
 
     def update
-        @birdwatcher = Birdwatcher.find(params[:id])
         if @birdwatcher.update(birdwatcher_params)
             redirect_to birdwatcher_path(@birdwatcher)
         else
@@ -34,13 +34,27 @@ class BirdwatchersController < ApplicationController
     end
 
     def show
-        @birdwatcher = Birdwatcher.find(params[:id])
-        # byebug
+        
+    end
+
+    def destroy
+        if current_user == @birdwatcher
+            @birdwatcher.destroy
+            session.destroy
+            redirect_to root_path
+        else
+            flash[:notice] = "You cannot delete this account since you are not its owner."
+            redirect_to root_path
+        end
     end
 
     private
 
         def birdwatcher_params
             params.require(:birdwatcher).permit(:name, :password, :age, :ornithologist)
+        end
+
+        def set_birdwatcher
+            @birdwatcher = Birdwatcher.find(params[:id])
         end
 end

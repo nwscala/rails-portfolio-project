@@ -1,3 +1,5 @@
+<h1>All the Birdwatchers on FTB</h1>
+
 <ul>
     <% @birdwatchers.each do |birdwatcher| %>
         <li><%= link_to birdwatcher.name, birdwatcher_path(birdwatcher) %></li>

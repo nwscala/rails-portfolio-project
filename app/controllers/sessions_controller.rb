@@ -13,6 +13,9 @@ class SessionsController < ApplicationController
         else
             @birdwatcher = Birdwatcher.new(login_params)
             @birdwatcher.valid?
+            if (@birdwatcher.errors.full_messages.length == 1) && (@birdwatcher.errors.full_messages.grep(/Age/).any?)
+                flash[:notice] = "We couldn't find that birdwatcher in our database, you could always"
+            end
             render :new
         end
     end
@@ -23,7 +26,6 @@ class SessionsController < ApplicationController
     end
 
     def github
-        # byebug
         @birdwatcher = Birdwatcher.find_or_create_by(uid: auth[:uid]) do |u|
             u.name = auth['info']['name']
             u.password = SecureRandom.hex

@@ -1,4 +1,14 @@
 <h1><%= @birdwatcher.name %>'s Page</h1>
+
+<h3>About <%= @birdwatcher.name %></h3>
+<p><%= @birdwatcher.name %> is <%= @birdwatcher.age %> years old.</p>
+<p>AND</p>
+<% if @birdwatcher.ornithologist %>
+    <p><%= @birdwatcher.name %> is an ornithologist.</p>
+<% else %>
+    <p><%= @birdwatcher.name %> is just a birdwatcher for fun.</p>
+<% end %>
+
 <% if current_user == @birdwatcher %>
     <h3>Your Sightings</h3>
 <% else %>
@@ -6,19 +16,31 @@
 <% end %>
 <ul>
     <% @birdwatcher.sightings.each do |sighting| %>
-        <li><%= link_to sighting.bird.common_name, birdwatcher_sighting_path(@birdwatcher, sighting) %></li>
+        <li>
+            <div>
+                <p>Common Name of Bird Spotted: <%= link_to sighting.bird.common_name, birdwatcher_sighting_path(@birdwatcher, sighting) %></p>
+                <p>Location of Sighting: <%= sighting.location %></p>
+                <p>Time of Day of Sighting: <%= sighting.time_of_day %></p>
+                <p>Time of Year of Sighting: <%= sighting.time_of_year %></p>
+            </div>
+        </li>
     <% end %>
 </ul>
-<% if @birdwatcher.ornithologist %>
-    <p>Ornithologists Only</p>
-    <%= link_to 'Create New Bird', new_bird_path %>
-<% end %>
-<br>
-<%= link_to 'Create New Sighting', new_birdwatcher_sighting_path(@birdwatcher)%>
-<br>
+
 <%= link_to 'Home Page', root_path %>
 <br>
-<div class="notice"><%= flash[:notice] %></div>
-<%= link_to 'Edit Your Profile', edit_birdwatcher_path(@birdwatcher) %>
-<br>
-<%= link_to 'Log Out', logout_path, method: :delete %>
+<% if current_user == @birdwatcher %>
+    <% if @birdwatcher.ornithologist %>
+        <p>Ornithologists Only</p>
+        <%= link_to 'Create New Bird', new_bird_path %>
+    <% end %>
+    <br>
+    <%= link_to 'Create New Sighting', new_birdwatcher_sighting_path(@birdwatcher)%>
+    <br>
+    <div class="notice"><%= flash[:notice] %></div>
+    <%= link_to 'Edit Your Profile', edit_birdwatcher_path(@birdwatcher) %>
+    <br>
+    <%= link_to 'Log Out', logout_path, method: :delete %>
+    <br>
+    <%= link_to 'Delete Profile', birdwatcher_path(@birdwatcher), method: :delete, data: {confirm: "Are you sure?"} %>
+<% end %>
