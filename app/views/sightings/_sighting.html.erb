@@ -1,0 +1,26 @@
+<% if sighting.errors.any? %>
+  <div id="error_explanation">
+    <h2>There were some errors:</h2>
+    <ul>
+      <% sighting.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_for [current_user, sighting] do |f| %>
+    <%= f.label "bird" %>
+    <%= f.collection_select :bird_id, Bird.all, :id, :common_name %>
+    <br>
+    <%= f.label :location %>
+    <%= f.text_field :location %>
+    <br>
+    <%= f.label :time_of_day %>
+    <%= f.select :time_of_day, options_for_select(["Morning (4:00AM-9:59AM)", "Noon (10:00AM-3:59PM)", "Dusk (4:00PM-9:59PM)", "Night (10:00PM-3:59AM)"]), include_blank: true %>
+    <br>
+    <%= f.label :time_of_year %>
+    <%= f.select :time_of_year, options_for_select(["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]), include_blank: true %>
+    <br>
+    <%= f.submit %>
+<% end %>

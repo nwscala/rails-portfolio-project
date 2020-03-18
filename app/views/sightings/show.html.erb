@@ -1,0 +1,10 @@
+<div>
+    <p>Name of Spotter: <%= link_to @sighting.birdwatcher.name, birdwatcher_path(@sighting.birdwatcher) %></p>
+    <p>Common Name of Bird Spotted: <%= link_to @sighting.bird.common_name, bird_path(@sighting.bird) %></p>
+    <p>Location of Sighting: <%= @sighting.location %></p>
+    <p>Time of Day of Sighting: <%= @sighting.time_of_day %></p>
+    <p>Time of Year of Sighting: <%= @sighting.time_of_year %></p>
+</div>
+
+<p><%= link_to "Edit Sighting", edit_birdwatcher_sighting_path(@birdwatcher, @sighting) %></p>
+<p><%= link_to 'Delete Sighting', birdwatcher_sighting_path(@birdwatcher, @sighting), method: :delete, data: {confirm: "Are you sure?"} %></p>

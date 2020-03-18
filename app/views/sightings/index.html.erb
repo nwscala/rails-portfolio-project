@@ -1,0 +1,13 @@
+<ul>
+    <% @sightings.each do |sighting| %>
+        <li>
+            <div>
+                <p>Name of Spotter: <%= link_to sighting.birdwatcher.name, birdwatcher_path(sighting.birdwatcher) %></p>
+                <p>Common Name of Bird Spotted: <%= link_to sighting.bird.common_name, birdwatcher_sighting_path(sighting.birdwatcher, sighting) %></p>
+                <p>Location of Sighting: <%= sighting.location %></p>
+                <p>Time of Day of Sighting: <%= sighting.time_of_day %></p>
+                <p>Time of Year of Sighting: <%= sighting.time_of_year %></p>
+            </div>
+        </li>
+    <% end %>
+</ul>
