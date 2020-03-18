@@ -1,5 +1,11 @@
+<h1>All the Birds on FtB</h1>
+
 <ul>
     <% @birds.each do |bird| %>
-        <li><%= link_to bird.name, bird_path(bird) %></li>
+        <li><%= link_to bird.common_name, bird_path(bird) %></li>
     <% end %>
 </ul>
+
+<% if current_user.ornithologist %>
+    <p><%= link_to "Create New Bird", new_bird_path %></p>
+<% end %>

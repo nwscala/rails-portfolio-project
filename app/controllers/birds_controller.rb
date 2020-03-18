@@ -12,6 +12,13 @@ class BirdsController < ApplicationController
 
     def create
         @bird = Bird.new(bird_params)
+        # byebug
+        if @bird.valid?
+            @bird.save
+            redirect_to bird_path(@bird)
+        else
+            render :new
+        end
     end
 
     def edit
@@ -19,17 +26,22 @@ class BirdsController < ApplicationController
     end
 
     def update
-
+        if @bird.update(bird_params)
+            redirect_to bird_path(@bird)
+        else
+            render :edit
+        end
     end
 
     def destroy
-
+        @bird.destroy
+        redirect_to birds_path
     end
 
     private
 
         def bird_params
-            require
+            params.require(:bird).permit(:common_name, :scientific_name, :conservation_status)
         end
 
         def set_bird

@@ -1,0 +1,23 @@
+<% if bird.errors.any? %>
+  <div id="error_explanation">
+    <h2>There were some errors:</h2>
+    <ul>
+      <% bird.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_for bird do |f| %>
+    <%= f.label :common_name %>
+    <%= f.text_field :common_name %>
+    <br>
+    <%= f.label :scientific_name %>
+    <%= f.text_field :scientific_name %>
+    <br>
+    <%= f.label :conservation_status %>
+    <%= f.select :conservation_status, options_for_select(["Not Evaluated (NE)", "Data Deficient (DD)", "Least Concern (LC)", "Conservation Dependent (CD)", "Near Threatened (NT)", "Vulnerable (VU)", "Endangered (EN)", "Critically Endangered (CR)"]), include_blank: true %>
+    <br>
+    <%= f.submit %>
+<% end %>

@@ -16,3 +16,9 @@
         </li>
     <% end %>
 </ul>
+
+<% if current_user.ornithologist %>
+    <p>Ornithologists Only</p>
+    <p><%= link_to "Edit Bird", edit_bird_path(@bird) %></p>
+    <p><%= link_to "Delete Bird", bird_path(@bird), method: :delete %></p>
+<% end %>
