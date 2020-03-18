@@ -7,6 +7,8 @@
   <p><%= link_to "Login", login_path %></p>
   <p><%= link_to "Login with GitHub", '/auth/github' %></p>
 <% else %>
-
+  <p><%= link_to "Sightings Index", sightings_path %></p>
+  <p><%= link_to "Birdwatchers Index", birdwatchers_path %></p>
+  <p><%= link_to "Your Page", birdwatcher_path(current_user) %></p>
 <% end %>
 
