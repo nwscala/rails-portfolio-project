@@ -8,4 +8,8 @@ class Birdwatcher < ApplicationRecord
     def self.ornithologist
         where(ornithologist: true)
     end
+
+    def self.casual_birdwatcher
+        where(ornithologist: false)
+    end
 end

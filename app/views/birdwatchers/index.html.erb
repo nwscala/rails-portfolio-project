@@ -1,7 +1,15 @@
 <h1>All the Birdwatchers on FtB</h1>
 
+<h3>Ornithologists</h3>
 <ul>
-    <% @birdwatchers.each do |birdwatcher| %>
+    <% Birdwatcher.ornithologist.each do |birdwatcher| %>
+        <li><%= link_to birdwatcher.name, birdwatcher_path(birdwatcher) %></li>
+    <% end %>
+</ul>
+
+<h3>Casual Birdwatchers</h3>
+<ul>
+    <% Birdwatcher.casual_birdwatcher.each do |birdwatcher| %>
         <li><%= link_to birdwatcher.name, birdwatcher_path(birdwatcher) %></li>
     <% end %>
 </ul>

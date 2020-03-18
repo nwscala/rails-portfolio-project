@@ -12,8 +12,7 @@ class BirdwatchersController < ApplicationController
 
     def create
         @birdwatcher = Birdwatcher.new(birdwatcher_params)
-        if @birdwatcher.valid?
-            @birdwatcher.save
+        if @birdwatcher.save
             session[:birdwatcher_id] = @birdwatcher.id
             redirect_to birdwatcher_path(@birdwatcher)
         else
@@ -22,7 +21,10 @@ class BirdwatchersController < ApplicationController
     end
 
     def edit
-        
+        if current_user != @birdwatcher
+            flash[:notice] = "You cannot edit someone else's page!"
+            redirect_to root_path
+        end
     end
 
     def update

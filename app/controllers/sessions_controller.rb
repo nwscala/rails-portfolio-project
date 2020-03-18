@@ -13,9 +13,7 @@ class SessionsController < ApplicationController
         else
             @birdwatcher = Birdwatcher.new(login_params)
             @birdwatcher.valid?
-            if (@birdwatcher.errors.full_messages.length == 1) && (@birdwatcher.errors.full_messages.grep(/Age/).any?)
-                flash[:notice] = "We couldn't find that birdwatcher in our database, you could always"
-            end
+            flash[:login_error] = "We couldn't find that birdwatcher in our database, you could always"
             render :new
         end
     end
@@ -30,11 +28,12 @@ class SessionsController < ApplicationController
             u.name = auth['info']['name']
             u.password = SecureRandom.hex
             u.age = 404
+            flash[:notice] = "Since you came from GitHub, you should update your personal information"
         end
 
         session[:birdwatcher_id] = @birdwatcher.id
 
-        flash[:notice] = "Since you came from GitHub, you should update your personal information"
+        
 
         redirect_to birdwatcher_path(@birdwatcher)
     end

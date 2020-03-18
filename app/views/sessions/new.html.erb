@@ -1,17 +1,6 @@
-<% if @birdwatcher.errors.any? %>
-  <div id="error_explanation">
-    <ul>
-      <% @birdwatcher.errors.full_messages.each do |message| %>
-        <% unless message.downcase.include?("age") %>
-          <li>ERROR: <%= message %></li>
-        <% end %>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
 
-<% if flash[:notice] %>
-  <div class="notice"><%= flash[:notice] %> <%= link_to "Create a New Birdwatcher", new_birdwatcher_path %></div>
+<% if flash[:login_error] %>
+  <div><%= flash[:login_error] %> <%= link_to "Create a New Birdwatcher", new_birdwatcher_path %></div>
 <% end %>
 <br>
 
