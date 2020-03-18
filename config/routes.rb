@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-  resources :sightings
+  resources :sightings, only: [:index]
   resources :birds
-  resources :birdwatchers
+  resources :birdwatchers do 
+    resources :sightings
+  end
   root to: 'static#home'
   get 'login', to: 'sessions#new', as: 'login'
   post 'login', to: 'sessions#create'
