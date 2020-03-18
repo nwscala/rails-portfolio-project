@@ -27,20 +27,21 @@
     <% end %>
 </ul>
 
-<%= link_to 'Home Page', root_path %>
+
 <br>
 <% if current_user == @birdwatcher %>
-    <% if @birdwatcher.ornithologist %>
+    <% if current_user.ornithologist %>
         <p>Ornithologists Only</p>
         <%= link_to 'Create New Bird', new_bird_path %>
+        <br>
     <% end %>
     <br>
-    <%= link_to 'Create New Sighting', new_birdwatcher_sighting_path(@birdwatcher)%>
+    <%= link_to 'Create New Sighting', new_birdwatcher_sighting_path(current_user)%>
     <br>
     <div class="notice"><%= flash[:notice] %></div>
-    <%= link_to 'Edit Your Profile', edit_birdwatcher_path(@birdwatcher) %>
+    <%= link_to 'Edit Your Profile', edit_birdwatcher_path(current_user) %>
     <br>
     <%= link_to 'Log Out', logout_path, method: :delete %>
     <br>
-    <%= link_to 'Delete Profile', birdwatcher_path(@birdwatcher), method: :delete, data: {confirm: "Are you sure?"} %>
+    <%= link_to 'Delete Profile', birdwatcher_path(current_user), method: :delete, data: {confirm: "Are you sure?"} %>
 <% end %>
