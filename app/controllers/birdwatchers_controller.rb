@@ -35,6 +35,7 @@ class BirdwatchersController < ApplicationController
 
     def show
         @birdwatcher = Birdwatcher.find(params[:id])
+        # byebug
     end
 
     private

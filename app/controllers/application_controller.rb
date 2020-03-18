@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
     end
 
     def current_user
-        @birdwatcher = Birdwatcher.find_by_id(session[:birdwatcher_id])
+        Birdwatcher.find_by_id(session[:birdwatcher_id])
     end
     
     def require_login
