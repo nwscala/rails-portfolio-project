@@ -3,7 +3,7 @@ class BirdwatchersController < ApplicationController
     before_action :set_birdwatcher, except: [:index, :new, :create]
     
     def index
-        @birdwatchers = Birdwatcher.all
+        
     end
 
     def new
