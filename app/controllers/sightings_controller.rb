@@ -1,5 +1,6 @@
 class SightingsController < ApplicationController
     before_action :birdwatcher_check
+    before_action :clean_sightings
     before_action :set_sighting, except: [:index, :new, :create]
 
     def index
@@ -73,6 +74,14 @@ class SightingsController < ApplicationController
             if !@sighting
                 flash[:notice] = "It seems like there isn't a sighting with that id in our database."
                 redirect_to root_path
+            end
+        end
+
+        def clean_sightings
+            Sighting.all.each do |sighting|
+                if !sighting.birdwatcher
+                    sighting.destroy
+                end
             end
         end
 end
