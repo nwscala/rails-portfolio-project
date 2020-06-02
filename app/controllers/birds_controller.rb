@@ -3,7 +3,11 @@ class BirdsController < ApplicationController
     before_action :set_bird, except: [:index, :new, :create]
     
     def index
-        @birds = Bird.all
+        if params[:search]
+            @birds = Bird.all.where(common_name: params[:search].capitalize)
+        else
+            @birds = Bird.all
+        end
     end
 
     def new

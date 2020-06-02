@@ -9,3 +9,11 @@
 <% if current_user.ornithologist %>
     <p><%= link_to "Create New Bird", new_bird_path %></p>
 <% end %>
+
+<%= form_tag birds_path, method: :get do %>
+    <%= label_tag("Search for a bird")%>
+    <%= text_field_tag(:search) %>
+    <br>
+    <%= submit_tag("Search")%>
+<% end %>
+<br>
